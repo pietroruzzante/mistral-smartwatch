@@ -1,0 +1,10 @@
+streamlit
+fastapi
+uvicorn
+requests
+py-agata
+matplotlib
+llama-cpp-python
+langchain
+mistralai
+python-dotenv
