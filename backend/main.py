@@ -1,31 +1,45 @@
 import pandas as pd
-from sqlalchemy import false
-
-from agp_analysis import agp_analysis
-import mistral_chat
+from backend.agp_analysis import agp_analysis
 from backend.mistral_chat import MistralChat
 from dotenv import load_dotenv
 import os
+from fastapi import FastAPI, UploadFile
+from pydantic import BaseModel
 
 load_dotenv()
 api_key = os.environ["MISTRAL_API_KEY"]
+app = FastAPI()
+model = "mistral-small-latest" # Mistral model
+chat = MistralChat(api_key=api_key, model=model) #initializes the chat with Mistral
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Mistral AI API!"}
+
+@app.post("/analyze")
+async def analyze(file: UploadFile):
+    """
+    Uploads the file, starts a new chat, calculate metrics and returns LLM interpretation of AGP
+    """
+
+    data = pd.read_csv(file.file) #reads csv
+    agp_metrics = agp_analysis(data) #calculates metrics using py-agata library
+    analysis_prompt = f"""
+    You have to analyze this data {agp_metrics}
+
+    Give a brief interpretation about the blood glucose state of this diabetics patient.
+    """
+
+    answer_interpretation = chat.new_message(analysis_prompt)
+
+    return {"message": answer_interpretation}
 
 
-def main(name):
+class ChatMessage(BaseModel):
+    message: str
+@app.post("/send_message")
+def send_message(message: ChatMessage):
+    answer = chat.new_message(message.message)
+    return {"message": answer}
 
-    new_message = False
-
-    model = "mistral-large-latest"
-
-    data = pd.read_csv('data/' + name + '.csv') #import data
-    agp_metrics = agp_analysis(data) #calculate metrics using py-agata library
-
-    MistralChat(api_key=api_key, model=model, agp_metrics=agp_metrics) #initializes the chat with Mistral
-
-    if new_message:
-        pass
-
-
-if __name__ == '__main__':
-    main('tr177_ee6ffc')
 
