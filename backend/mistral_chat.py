@@ -9,7 +9,7 @@ class MistralChat:
         self.client = Mistral(api_key=api_key)
         self.model = model
         self.messages = []
-        self.messages.append({"role": "system", "content": "You are a helpful diabetes assistant. You always must finish the answer with a question"})
+        self.messages.append({"role": "system", "content": "You are a helpful assistant for analyzing smartwatch data. You always must finish the answer with a question"})
 
 
     def new_message(self, new_message):

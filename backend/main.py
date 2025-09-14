@@ -1,5 +1,5 @@
 import pandas as pd
-from backend.agp_analysis import agp_analysis
+from backend.smartwatch_data_analysis import report
 from backend.mistral_chat import MistralChat
 from dotenv import load_dotenv
 import os
@@ -19,15 +19,15 @@ def read_root():
 @app.post("/analyze")
 async def analyze(file: UploadFile):
     """
-    Uploads the file, starts a new chat, calculate metrics and returns LLM interpretation of AGP
+    Uploads the file, starts a new chat, calculate metrics and returns LLM interpretation of data
     """
 
     data = pd.read_csv(file.file) #reads csv
-    agp_metrics = agp_analysis(data) #calculates metrics using py-agata library
+    smartwatch_metrics = report(data) #calculates metrics using py-agata library
     analysis_prompt = f"""
-    You have to analyze this data {agp_metrics}
+    You have to analyze this data {smartwatch_metrics}
 
-    Give a brief interpretation about the blood glucose state of this diabetics patient.
+    Give a brief interpretation about the health state of this man during this day.
     """
 
     answer_interpretation = chat.new_message(analysis_prompt)
