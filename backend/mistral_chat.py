@@ -1,15 +1,11 @@
 from mistralai import Mistral
-from dotenv import load_dotenv
-import os
-from mistralai.client import MistralClient
-
 
 class MistralChat:
     def __init__(self, api_key, model):
         self.client = Mistral(api_key=api_key)
         self.model = model
         self.messages = []
-        self.messages.append({"role": "system", "content": "You are a helpful assistant for analyzing smartwatch data. You always must finish the answer with a question"})
+        self.messages.append({"role": "system", "content": "You are a helpful assistant for analyzing smartwatch data"})
 
 
     def new_message(self, new_message):

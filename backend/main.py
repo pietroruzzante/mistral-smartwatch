@@ -1,5 +1,5 @@
 import pandas as pd
-from backend.smartwatch_data_analysis import report
+from backend.data_report import report
 from backend.mistral_chat import MistralChat
 from dotenv import load_dotenv
 import os
@@ -25,9 +25,10 @@ async def analyze(file: UploadFile):
     data = pd.read_csv(file.file) #reads csv
     smartwatch_metrics = report(data) #calculates metrics using py-agata library
     analysis_prompt = f"""
-    You have to analyze this data {smartwatch_metrics}
+    You have to analyze my smartwatch's data: 
+    {smartwatch_metrics}
 
-    Give a brief interpretation about the health state of this man during this day.
+    Give a brief interpretation about my health state during this day.
     """
 
     answer_interpretation = chat.new_message(analysis_prompt)
@@ -37,6 +38,7 @@ async def analyze(file: UploadFile):
 
 class ChatMessage(BaseModel):
     message: str
+
 @app.post("/send_message")
 def send_message(message: ChatMessage):
     answer = chat.new_message(message.message)

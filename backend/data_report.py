@@ -39,5 +39,7 @@ def report(data: pd.DataFrame):
             "total_steps": total_steps,
             "avg_spo2_percentage": avg_spo2_percentage,
             "avg_stress_level": avg_stress_level,
+            "max_stress_level": max_stress_level,
+            "time_max_stress_level": time_max_stress_level,
             "total_calories": total_calories
             }
