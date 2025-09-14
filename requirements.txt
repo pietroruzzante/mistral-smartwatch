@@ -8,3 +8,4 @@ llama-cpp-python
 langchain
 mistralai
 python-dotenv
+streamlit
