@@ -1,1 +1,1 @@
-# Diabetes LLM AGP
+# Smartwatch data analyzer
