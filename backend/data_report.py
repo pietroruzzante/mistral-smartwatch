@@ -4,12 +4,13 @@ import pandas as pd
 def report(data: pd.DataFrame):
     """
     This function provides the main AGP metrics of a given glucose trace.
-    @param trace:
+    :param data:
         a Pandas dataframe
-    @returns:
+    :return:
         a dictionary with a report of the main metrics
     """
 
+    #extract columns from dataframe
     time = data["timestamp"].to_numpy()
     heart_rate = data["heart_rate_bpm"].to_numpy()
     steps = data["steps"].to_numpy()
@@ -18,6 +19,7 @@ def report(data: pd.DataFrame):
     stress_level = data["stress_level"].to_numpy()
     sleep_stage = data["sleep_stage"].to_numpy()
 
+    # calculate metrics
     avg_hr = heart_rate.mean()
     total_steps = steps.sum()
     avg_spo2_percentage = spo2_percentage.mean()
