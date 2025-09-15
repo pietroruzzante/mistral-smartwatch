@@ -7,14 +7,12 @@ class MistralChat:
         self.messages = []
         self.messages.append({"role": "system", "content": "You are a helpful assistant for analyzing smartwatch data"})
 
-
     def new_message(self, new_message):
-
+        # append a new message to chat
         self.messages.append({"role": "user", "content": new_message})
-
+        # LLM calling
         chat_response = self.client.chat.complete(model=self.model, messages=self.messages)
         answer = chat_response.choices[0].message.content
-
         self.messages.append({"role": "assistant", "content": answer})
 
         return answer
