@@ -5,7 +5,13 @@ class MistralChat:
         self.client = Mistral(api_key=api_key)
         self.model = model
         self.messages = []
-        self.messages.append({"role": "system", "content": "You are a helpful assistant for analyzing smartwatch data"})
+        self.messages.append({"role": "system",
+                              "content":
+                            """You are a helpful assistant for analyzing smartwatch data. Please return your analysis in Markdown with sections:
+                            - Use ### for section headers
+                            - Use bullet points for metrics
+                            - Use short paragraphs for explanations"""
+                              })
 
     def new_message(self, new_message):
         # append a new message to chat

@@ -25,19 +25,16 @@ def report(data: pd.DataFrame):
     avg_spo2_percentage = spo2_percentage.mean()
     avg_stress_level = stress_level.mean()
     max_stress_level = stress_level.max()
-    time_max_stress_level = time[stress_level == max_stress_level]
     total_calories = calories.sum()
     vals, count = np.unique(sleep_stage, return_counts=True)
-    count = count/60
 
     return {
-        "avg_hr": float(avg_hr),
+        "avg_hr": int(avg_hr),
         "total_steps": int(total_steps),
         "avg_spo2_percentage": float(avg_spo2_percentage),
-        "avg_stress_level": float(avg_stress_level),
+        "avg_stress_level": int(avg_stress_level),
         "max_stress_level": int(max_stress_level),
-        "time_max_stress_level": time_max_stress_level.astype(str).tolist(),
-        "total_calories": float(total_calories),
+        "total_calories": int(total_calories),
         "sleep_stage": vals.astype(str).tolist(),
         "sleep_count": count.astype(int).tolist()
     }
