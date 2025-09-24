@@ -10,7 +10,7 @@ def report(data: pd.DataFrame):
         a dictionary with a report of the main metrics
     """
 
-    #extract columns from dataframe
+    # extract columns from dataframe
     time = data["timestamp"].to_numpy()
     heart_rate = data["heart_rate_bpm"].to_numpy()
     steps = data["steps"].to_numpy()
@@ -27,21 +27,18 @@ def report(data: pd.DataFrame):
     max_stress_level = stress_level.max()
     time_max_stress_level = time[stress_level == max_stress_level]
     total_calories = calories.sum()
+    vals, count = np.unique(sleep_stage, return_counts=True)
+    count = count/60
 
-    print(f"avg_hr = {avg_hr}")
-    print(f"total_steps = {total_steps}")
-    print(f"avg_spo2_percentage = {avg_spo2_percentage}")
-    print(f"avg_stress_level = {avg_stress_level}")
-    print(f"max_stress_level = {max_stress_level}")
-    print(f"time_max_stress_level = {time_max_stress_level}")
-    print(f"total_calories = {total_calories}")
+    return {
+        "avg_hr": float(avg_hr),
+        "total_steps": int(total_steps),
+        "avg_spo2_percentage": float(avg_spo2_percentage),
+        "avg_stress_level": float(avg_stress_level),
+        "max_stress_level": int(max_stress_level),
+        "time_max_stress_level": time_max_stress_level.astype(str).tolist(),
+        "total_calories": float(total_calories),
+        "sleep_stage": vals.astype(str).tolist(),
+        "sleep_count": count.astype(int).tolist()
+    }
 
-
-    return {"avg_hr": avg_hr,
-            "total_steps": total_steps,
-            "avg_spo2_percentage": avg_spo2_percentage,
-            "avg_stress_level": avg_stress_level,
-            "max_stress_level": max_stress_level,
-            "time_max_stress_level": time_max_stress_level,
-            "total_calories": total_calories
-            }
