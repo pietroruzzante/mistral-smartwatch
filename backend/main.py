@@ -4,6 +4,7 @@ from backend.mistral_chat import MistralChat
 from dotenv import load_dotenv
 import os
 from fastapi import FastAPI, UploadFile
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 
 load_dotenv()
@@ -15,6 +16,10 @@ chat = MistralChat(api_key=api_key, model=model) #initializes the chat with Mist
 @app.get("/")
 def read_root():
     return {"message": "Welcome to Mistral AI API!"}
+
+@app.get("/example")
+def get_example():
+    return FileResponse("data/smartwatch_daily_data_smoothHR_stressMA.csv", media_type="text/csv", filename="example.csv")
 
 @app.post("/analyze")
 async def analyze(file: UploadFile):
@@ -48,7 +53,6 @@ async def analyze(file: UploadFile):
             "avg_spo2_percentage": smartwatch_metrics["avg_spo2_percentage"],
             "avg_stress_level": smartwatch_metrics["avg_stress_level"],
             "max_stress_level": smartwatch_metrics["max_stress_level"],
-            "time_max_stress_level": smartwatch_metrics["time_max_stress_level"],
             "total_calories": smartwatch_metrics["total_calories"],
             "sleep_stage": smartwatch_metrics["sleep_stage"],
             "sleep_count": smartwatch_metrics["sleep_count"],
