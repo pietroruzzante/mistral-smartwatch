@@ -8,9 +8,8 @@ class MistralChat:
         self.messages.append({"role": "system",
                               "content":
                             """You are a helpful assistant for analyzing smartwatch data. Please return your analysis in Markdown with sections:
-                            - Use ### for section subheaders
-                            - Use bullet points for metrics
-                            - Use short paragraphs for explanations (max 20 words for each one)"""
+                            - Use bullet points for every metrics
+                            - Use short paragraphs for explanations (max 40 words for each one)"""
                               })
 
     def new_message(self, new_message):
