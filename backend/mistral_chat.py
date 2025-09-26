@@ -20,5 +20,6 @@ class MistralChat:
         chat_response = self.client.chat.complete(model=self.model, messages=self.messages)
         answer = chat_response.choices[0].message.content
         self.messages.append({"role": "assistant", "content": answer})
+
         return answer
 
