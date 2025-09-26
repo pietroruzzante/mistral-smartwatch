@@ -10,7 +10,7 @@ from pydantic import BaseModel
 load_dotenv()
 api_key = os.environ["MISTRAL_API_KEY"]
 app = FastAPI()
-model = "ministral-8b-latest" # Mistral model
+model = "mistral-large-latest" # Mistral model
 chat = MistralChat(api_key=api_key, model=model) #initializes the chat with Mistral
 
 @app.get("/")

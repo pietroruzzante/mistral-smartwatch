@@ -8,9 +8,9 @@ class MistralChat:
         self.messages.append({"role": "system",
                               "content":
                             """You are a helpful assistant for analyzing smartwatch data. Please return your analysis in Markdown with sections:
-                            - Use ### for section headers
+                            - Use ### for section subheaders
                             - Use bullet points for metrics
-                            - Use short paragraphs for explanations"""
+                            - Use short paragraphs for explanations (max 20 words for each one)"""
                               })
 
     def new_message(self, new_message):
@@ -20,6 +20,5 @@ class MistralChat:
         chat_response = self.client.chat.complete(model=self.model, messages=self.messages)
         answer = chat_response.choices[0].message.content
         self.messages.append({"role": "assistant", "content": answer})
-
         return answer
 
