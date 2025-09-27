@@ -11,16 +11,15 @@ st.set_page_config(
     layout="wide"
 )
 st.title("Smartwatch Data Analyzer")
-st.write("This app provide a complete overview of daily health status, based on smartwatch data")
+st.write("This app provides a complete overview of your daily health condition, based on smartwatch data")
 
+# App session state initialization
 first_answer = ""
 if "chat_ready" not in st.session_state:
     st.session_state.chat_ready = False
 
-# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = [{"role": "assistant", "content": "Ask me more about your health status!"}]
-
 
 # Two-columns layout
 col1, col2 = st.columns([2, 1])
@@ -39,7 +38,7 @@ with col1:
         st.session_state.data = pd.read_csv(uploaded_file)
         files = {"file": (uploaded_file.name, uploaded_file.getvalue(), "text/csv")}
 
-    # use example CSV
+    # example CSV upload
     if st.button("Use example CSV"):
         response = requests.get(f"{backend_url}/example")
         if response.status_code == 200:
@@ -94,7 +93,7 @@ with col1:
                           y_label="stress level",
                           color="#9fcbee")
 
-        # --- Sleep ---
+        # Sleep
         st.write("### Sleep")
         c1, c2, c3, c4 = st.columns(4)
         with c1:
@@ -110,7 +109,7 @@ with col1:
             st.metric("REM",
                       f"{st.session_state.response['sleep_count'][3] // 60}h {st.session_state.response['sleep_count'][3] % 60}m")
 
-        # --- Physical Activity ---
+        # Physical Activity
         st.write("### Physical Activity")
         c1, c2 = st.columns(2)
         with c1:
@@ -129,10 +128,10 @@ with col2:
     if not st.session_state.chat_ready:
         st.caption("Load a CSV to get an overview about your health status")
 
-    # mostra SEMPRE il primo report se presente
+    # show Mistral report
     if "first_answer" in st.session_state:
         if not st.session_state.get("first_answer_animated", False):
-            # anima SOLO la prima volta
+            # typing animation
             placeholder = st.empty()
             acc = ""
             for ch in st.session_state.first_answer:
@@ -142,32 +141,32 @@ with col2:
             placeholder.markdown(acc)
             st.session_state.first_answer_animated = True
         else:
-            # dai rerun in poi: niente animazione
+            # turn off animation
             st.markdown(st.session_state.first_answer)
 
 
-# --- CHAT DI FOLLOW-UP (fuori dalle colonne) ---
+# follow-up chat
 if st.session_state.get("chat_ready", False):
     st.markdown("### More insights")
 
-    # mostra solo i messaggi di follow-up (il primo report NON è qui)
+    # show chat
     for m in st.session_state.get("messages", []):
         with st.chat_message(m["role"]):
             st.markdown(m["content"])
 
-    prompt = st.chat_input("Ask for more insights")
+    prompt = st.chat_input("Ask to Mistral for more insights")
     if prompt:
-        # append messaggio utente
+        # append user message
         st.session_state.messages.append({"role": "user", "content": prompt})
         with st.chat_message("user"):
             st.markdown(prompt)
 
-        # invia al backend
+        # send to backend
         res = requests.post(f"{backend_url}/send_message", json={"message": prompt})
         if res.status_code == 200:
             answer = res.json()["message"]
 
-            # typing finto
+            # typing
             with st.chat_message("assistant"):
                 ph = st.empty()
                 acc = ""
