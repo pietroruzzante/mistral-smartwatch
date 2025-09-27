@@ -2,7 +2,7 @@
 
 *A demo application built with **FastAPI**, **Streamlit**, and the **Mistral API** to analyze smartwatch data and provide AI-powered health insights.* 
 
-<img src="data/homepage.png" alt="Smartwatch Analyzer Dashboard" width="700">
+<img src="data/homepage.png" alt="Smartwatch Analyzer Dashboard" width="2920">
 
 ---
 
