@@ -46,7 +46,7 @@ The app is organized into two main modules:
     ```
    docker-compose up --build
     ```
-4. Access the app: http://localhost:8501
+4. Access the app at: http://localhost:3000
 
 The repo includes an example CSV dataset in **data/**.
 You can load it directly from the UI using the "Use example CSV" button.
