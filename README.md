@@ -31,17 +31,17 @@ The app is organized into two main modules:
   - Displays metrics and time-series charts  
   - Includes an assistant chat panel for deeper exploration  
 
-## Installation & Setup
+## Fast installation
 
 1. Clone the repo:
     ```
     git clone https://github.com/pietroruzzante/mistral-smartwatch.git
     cd mistral-smartwatch
     ```
-2. Copy .env.example into .env and add your Mistral API key into it.
-    ```
-   cp .env.example .env 
-    ```
+2. Create a `.env` file with your Mistral API key:
+   ```
+   MISTRAL_API_KEY=your_api_key_here
+   ```
 3. Build and run the container
     ```
    docker-compose up --build

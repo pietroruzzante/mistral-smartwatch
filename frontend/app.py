@@ -3,8 +3,9 @@ import streamlit as st
 import time
 import pandas as pd
 from io import StringIO
+import os
 
-backend_url = "http://localhost:8000"
+backend_url = os.getenv("BACKEND_URL", "http://localhost:8000")
 
 st.set_page_config(
     page_title="Smartwatch Health Report",
