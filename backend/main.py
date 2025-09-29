@@ -40,7 +40,7 @@ async def analyze(file: UploadFile):
     avg_stress_level = smartwatch_metrics["avg_stress_level"]
 
     analysis_prompt = f"""
-    You have to analyze my smartwatch's data and return a brief overview of my health quality.
+    You have to analyze my smartwatch's data and return a brief overview of my health status.
     
     This is my data to analyze:
     date : {date}
