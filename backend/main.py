@@ -12,7 +12,7 @@ api_key = os.environ["MISTRAL_API_KEY"]
 app = FastAPI()
 model = "mistral-large-latest" # Mistral model
 
-#initializes the chat with Mistral
+#initializes a chat with Mistral
 chat = MistralChat(api_key=api_key, model=model)
 
 @app.get("/")
