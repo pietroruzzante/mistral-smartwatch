@@ -31,20 +31,6 @@ The app is organized into two main modules:
   - Displays metrics and time-series charts  
   - Includes an assistant chat panel for deeper exploration  
 
-    
-```mermaid
-graph TD
-    A[User Uploads CSV / Example Dataset] --> B[Frontend Streamlit UI]
-    B --> C[Backend FastAPI]
-    C --> D[Data Processing pandas + metrics extraction]
-    C --> E[Mistral API - LLM Analysis]
-    D --> F[Structured Metrics: HR, Stress, Sleep, Steps, Calories]
-    E --> G[AI-Powered Health Report]
-    F --> B
-    G --> B
-    B --> H[User Sees Dashboard + Can Chat with Assistant]
-```
-
 ## Fast installation
 
 1. Clone the repo:
