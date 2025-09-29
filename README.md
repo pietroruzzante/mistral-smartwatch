@@ -2,9 +2,7 @@
 
 *A demo application built with **FastAPI**, **Streamlit**, and the **Mistral API** to analyze smartwatch data and provide AI-powered health insights.*
 
-This application demonstrates the possibility of integrating LLMs into  to get scalable, personalized feedback from raw data streams.
-
-<img src="data/homepage.png" alt="Smartwatch Analyzer Dashboard" width="2920">
+This application demonstrates the possibility of integrating LLMs into digital health and wellness platforms to deliver scalable, personalized feedback from raw data streams.
 
 ---
 
@@ -32,6 +30,20 @@ The app is organized into two main modules:
   - Provides a clean and interactive UI  
   - Displays metrics and time-series charts  
   - Includes an assistant chat panel for deeper exploration  
+
+    
+```mermaid
+graph TD
+    A[User Uploads CSV / Example Dataset] --> B[Frontend (Streamlit UI)]
+    B --> C[Backend (FastAPI)]
+    C --> D[Data Processing (pandas + metrics extraction)]
+    C --> E[Mistral API - LLM Analysis]
+    D --> F[Structured Metrics: HR, Stress, Sleep, Steps, Calories]
+    E --> G[AI-Powered Health Report]
+    F --> B
+    G --> B
+    B --> H[User Sees Dashboard + Can Chat with Assistant]
+```
 
 ## Fast installation
 
