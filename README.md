@@ -34,9 +34,9 @@ The app is organized into two main modules:
     
 ```mermaid
 graph TD
-    A[User Uploads CSV / Example Dataset] --> B[Frontend (Streamlit UI)]
-    B --> C[Backend (FastAPI)]
-    C --> D[Data Processing (pandas + metrics extraction)]
+    A[User Uploads CSV / Example Dataset] --> B[Frontend Streamlit UI]
+    B --> C[Backend FastAPI]
+    C --> D[Data Processing pandas + metrics extraction]
     C --> E[Mistral API - LLM Analysis]
     D --> F[Structured Metrics: HR, Stress, Sleep, Steps, Calories]
     E --> G[AI-Powered Health Report]
