@@ -1,6 +1,8 @@
 # Smartwatch data analyzer
 
-*A demo application built with **FastAPI**, **Streamlit**, and the **Mistral API** to analyze smartwatch data and provide AI-powered health insights.* 
+*A demo application built with **FastAPI**, **Streamlit**, and the **Mistral API** to analyze smartwatch data and provide AI-powered health insights.*
+
+This application demonstrates the possibility of integrating LLMs into  to get scalable, personalized feedback from raw data streams.
 
 <img src="data/homepage.png" alt="Smartwatch Analyzer Dashboard" width="2920">
 
@@ -51,9 +53,31 @@ The app is organized into two main modules:
 The repo includes an example CSV dataset in **data/**.
 You can load it directly from the UI using the "Use example CSV" button.
 
-If you want to use your own dataset, it must be a CSV file with: 
+---
 
+## Loading your CSV
+
+You can upload your own smartwatch data as a CSV file.  
+The file must follow this structure:
+
+### Required Columns
+- **timestamp** → date and time in the format `YYYY-MM-DD HH:MM`
+- **heart_rate_bpm** → heart rate in beats per minute (integer)
+- **steps** → number of steps recorded at that timestamp (integer)
+- **calories** → calories burned (float or integer)
+- **spo2_percent** → blood oxygen saturation in percentage (integer)
+- **stress_level** → stress indicator, value between 0–100 (integer)
+- **sleep_stage** → categorical label of sleep stage  
+  (`Awake`, `Light`, `Deep`, `REM`)
+
+### Example
+```csv
+timestamp,heart_rate_bpm,steps,calories,spo2_percent,stress_level,sleep_stage
+2025-09-14 07:00,80,5,2.5,97,40,Awake
+2025-09-14 07:01,82,6,2.6,97,42,Awake
+```
 ---
 
 ### Author
 Developed by Pietro Ruzzante
+AI & Full-Stack Developer
