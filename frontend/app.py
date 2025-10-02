@@ -4,6 +4,7 @@ import time
 import pandas as pd
 from io import StringIO
 import os
+import altair as alt
 
 backend_url = os.getenv("BACKEND_URL", "http://localhost:8000")
 
@@ -67,32 +68,53 @@ with col1:
 
     # Show results
     if "data" in st.session_state and "response" in st.session_state:
-
         # --- Heart Rate & Stress side by side ---
         col3, col4 = st.columns(2)
+
         with col3:
             st.write("### Heart Rate")
             st.metric("Average heart rate",
                       f"{st.session_state.response['avg_hr']} bpm",
                       delta="-8", delta_color="inverse")
-            st.line_chart(st.session_state.data,
-                          y="heart_rate_bpm",
-                          height=300,
-                          x_label="time",
-                          y_label="bpm",
-                          color="#d8031c")
+
+            df = st.session_state.data.copy()
+            df["timestamp"] = pd.to_datetime(df["timestamp"])
+
+            hr_chart = (
+                alt.Chart(df)
+                .mark_line(color="#d8031c")
+                .encode(
+                    x=alt.X(
+                        "timestamp:T",
+                        title="Time",
+                        axis=alt.Axis(format="%H:%M", tickCount=6)  # mostra ~6 tick distribuiti
+                    ),
+                    y=alt.Y("heart_rate_bpm:Q", title="bpm")
+                )
+                .properties(height=300)
+            )
+            st.altair_chart(hr_chart, use_container_width=True)
+
         with col4:
             st.write("### Stress Level")
             st.metric("Average stress level",
                       f"{st.session_state.response['avg_stress_level']}%",
                       delta="-8%", delta_color="inverse")
 
-            st.line_chart(st.session_state.data,
-                          y="stress_level",
-                          height=300,
-                          x_label="time",
-                          y_label="stress level",
-                          color="#9fcbee")
+            stress_chart = (
+                alt.Chart(df)
+                .mark_line(color="#9fcbee")
+                .encode(
+                    x=alt.X(
+                        "timestamp:T",
+                        title="Time",
+                        axis=alt.Axis(format="%H:%M", tickCount=6)  # stesso criterio
+                    ),
+                    y=alt.Y("stress_level:Q", title="Stress level")
+                )
+                .properties(height=300)
+            )
+            st.altair_chart(stress_chart, use_container_width=True)
 
         # Sleep
         st.write("### Sleep")
