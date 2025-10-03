@@ -87,7 +87,7 @@ with col1:
                     x=alt.X(
                         "timestamp:T",
                         title="Time",
-                        axis=alt.Axis(format="%H:%M", tickCount=6)  # mostra ~6 tick distribuiti
+                        axis=alt.Axis(format="%H:%M", tickCount=6)
                     ),
                     y=alt.Y("heart_rate_bpm:Q", title="bpm")
                 )
@@ -103,12 +103,12 @@ with col1:
 
             stress_chart = (
                 alt.Chart(df)
-                .mark_line(color="#9fcbee")
+                .mark_line(color="#3f8fc4")
                 .encode(
                     x=alt.X(
                         "timestamp:T",
                         title="Time",
-                        axis=alt.Axis(format="%H:%M", tickCount=6)  # stesso criterio
+                        axis=alt.Axis(format="%H:%M", tickCount=6)
                     ),
                     y=alt.Y("stress_level:Q", title="Stress level")
                 )

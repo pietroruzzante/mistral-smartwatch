@@ -46,7 +46,7 @@ The app is organized into two main modules:
     ```
    docker compose up --build
     ```
-4. Access the app at port 3000: 
+4. Access the web app at **[port 3000](http://localhost:3000)**: 
     ```
     http://localhost:3000
     ```

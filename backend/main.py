@@ -21,7 +21,7 @@ def read_root():
 
 @app.get("/example")
 def get_example():
-    "Sends example data file to frontend"
+    "Sends example dataframe file to frontend for showing data"
     return FileResponse("data/smartwatch_daily_data_example.csv", media_type="text/csv", filename="example.csv")
 
 @app.post("/analyze")
@@ -54,7 +54,9 @@ async def analyze(file: UploadFile):
     - Subtitles as bold text (e.g. **Heart Rate**)
     - Bullets for explanations
 
-    Important: Do not use triple backticks (```) or quotes (''') at the start and do not use # or ## or ### for headings.
+    Important: 
+    - Do not use triple backticks (```) or quotes (''') at the start and do not use # or ## or ### for headings.
+    - Write about 250 words in total
     """
 
     answer_interpretation = chat.new_message(analysis_prompt)
