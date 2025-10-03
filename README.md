@@ -46,10 +46,14 @@ The app is organized into two main modules:
     ```
    docker-compose up --build
     ```
-4. Access the app at: http://localhost:3000
+4. Access the app at port 3000: 
+    ```
+    http://localhost:3000
+    ```
+5. Click on **`Use example CSV`** button
 
-The repo includes an example CSV dataset in **data/**.
-You can load it directly from the UI using the "Use example CSV" button.
+    The repo includes an example CSV dataset in **data/**.
+    You can load it directly from the UI using the "Use example CSV" button.
 
 ---
 
