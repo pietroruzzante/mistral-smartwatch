@@ -44,7 +44,7 @@ The app is organized into two main modules:
    ```
 3. Build and run the container
     ```
-   docker-compose up --build
+   docker compose up --build
     ```
 4. Access the app at port 3000: 
     ```
