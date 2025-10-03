@@ -59,7 +59,7 @@ The app is organized into two main modules:
 
 ## Loading your CSV
 
-You can upload your own smartwatch data as a CSV file.  
+Alternatively, you can upload your own smartwatch data as a CSV file.  
 The file must follow this structure:
 
 ### Required Columns
