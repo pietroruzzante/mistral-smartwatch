@@ -31,7 +31,7 @@ The app is organized into two main modules:
   - Displays metrics and time-series charts  
   - Includes an assistant chat panel for deeper exploration  
 
-## Fast installation
+## Fast demo
 
 1. Clone the repo:
     ```
